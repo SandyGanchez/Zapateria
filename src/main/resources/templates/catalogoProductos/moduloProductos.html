@@ -1,158 +1,218 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-	<title>Productos</title>
-	<div th:replace="~{lol :: bootstrap}"></div>
 
-	<style>
-		.img-producto{
-			width:90px;
-			height:90px;
-			object-fit:cover;
-			border-radius:10px;
-		}
-	</style>
+<head>
+
+<title>Catálogo Productos</title>
+
+
+<div th:replace="~{lol :: bootstrap}">
+</div>
+
+
+
+<style>
+
+.card img{
+
+height:250px;
+object-fit:cover;
+
+}
+
+</style>
+
 
 </head>
 
+
+
 <body>
 
-<div th:replace="~{lol :: menu}"></div>
+
+<div th:replace="~{lol :: menu}">
+</div>
+
+
+
 
 
 <div class="container mt-4">
 
 
-	<h1 class="text-center mb-4" 
-		th:text="${mensaje}">
-		</h1>
+
+<div class="d-flex justify-content-between align-items-center">
 
 
-	<div class="d-flex justify-content-between mb-3">
-
-		<h3>Catálogo de Productos</h3>
-
-
-		<a th:href="@{/extraerProductos/nuevo}" 
-		   class="btn btn-primary">
-		   ➕ Nuevo Producto
-		</a>
-
-	</div>
+<h2>
+Catálogo de productos
+</h2>
 
 
 
-	<table class="table table-bordered table-striped table-hover shadow">
+<a 
+th:href="@{/extraerProductos/nuevo}"
+class="btn btn-primary">
+
+➕ Nuevo Producto
+
+</a>
 
 
-		<thead class="table-dark">
+</div>
 
-			<tr>
-
-				<th>Imagen</th>
-				<th>Producto</th>
-				<th>Descripción</th>
-				<th>Precio</th>
-				<th>Marca</th>
-				<th>Estatus</th>
-				<th>Acciones</th>
-
-			</tr>
-
-		</thead>
+<br>
 
 
 
-		<tbody>
 
 
-			<tr th:each="producto : ${productos}">
-
-
-				<td>
-
-					<img 
-					th:src="${producto.imagen}"
-					class="img-producto"
-					alt="producto">
-
-				</td>
+<div class="row">
 
 
 
-				<td th:text="${producto.nombreSandraSG}">
-				</td>
+
+
+<div 
+class="col-md-4 mb-4"
+th:each="producto : ${productos}">
 
 
 
-				<td th:text="${producto.descripcion}">
-				</td>
+
+
+<div class="card shadow">
 
 
 
-				<td>
 
-					$
-					<span th:text="${producto.precio}">
-					</span>
 
-				</td>
+<img 
+th:src="${producto.imagen}"
+class="card-img-top">
 
 
 
-				<td th:text="${producto.marca != null ? producto.marca.nombreMarthaASL : 'Sin marca'}">
-				</td>
+
+
+<div class="card-body">
 
 
 
-				<td>
 
-					<span class="badge bg-success"
-					th:text="${producto.estatus}">
-					</span>
 
-				</td>
+<h4 
+th:text="${producto.nombreSandraSG}">
+</h4>
 
 
 
-				<td>
 
 
-					<a 
-					th:href="@{'/extraerProductos/editar/' + ${producto.uuid}}"
-					class="btn btn-sm btn-info">
-
-					✏️ Editar
-
-					</a>
+<p 
+th:text="${producto.descripcion}">
+</p>
 
 
 
-					<a 
-					th:href="@{'/extraerProductos/eliminar/' + ${producto.uuid}}"
-					class="btn btn-sm btn-danger"
-					onclick="return confirm('¿Está seguro?')">
-
-					🗑️ Eliminar
-
-					</a>
 
 
-				</td>
+<h5 class="text-success">
+
+$
+
+<span 
+th:text="${producto.precio}">
+</span>
+
+</h5>
 
 
-			</tr>
 
 
-		</tbody>
 
 
-	</table>
+
+<p>
+Marca:
+
+<span th:text="${producto.marca?.nombreMarthaASL ?: 'Sin marca'}">
+</span>
+
+</p>
+
+
+
+
+
+
+
+
+<span 
+class="badge bg-success"
+th:text="${producto.estatus}">
+</span>
+
+
+
+
+
+<br><br>
+
+
+
+
+
+<a
+th:href="@{'/extraerProductos/editar/' + ${producto.uuid}}"
+class="btn btn-info btn-sm">
+
+✏ Editar
+
+</a>
+
+
+
+
+
+<a
+th:href="@{'/extraerProductos/eliminar/' + ${producto.uuid}}"
+class="btn btn-danger btn-sm"
+onclick="return confirm('¿Eliminar producto?')">
+
+🗑 Eliminar
+
+</a>
+
+
 
 
 
 </div>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
 
 
 </body>

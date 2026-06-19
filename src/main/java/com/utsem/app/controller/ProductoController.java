@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.utsem.app.dto.ProductoDTO;
 import com.utsem.app.enums.Estatus;
+import com.utsem.app.repo.MarcaRepo;
 import com.utsem.app.service.ProductoService;
 
 import jakarta.validation.Valid;
@@ -18,8 +19,14 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("extraerProductos")
 public class ProductoController {
-	@Autowired
-	ProductoService productoService;
+
+
+@Autowired
+ProductoService productoService;
+
+
+@Autowired
+MarcaRepo marcaRepo;
 	
 	@GetMapping("listar")
 	public String metodoListar (Model model) {
@@ -29,9 +36,14 @@ public class ProductoController {
 	}
 	@GetMapping("nuevo")
 	public String metodoNuevo(Model model) {
-		model.addAttribute("estados", Estatus.values());
-		model.addAttribute("producto", new ProductoDTO());
-		return"/catalogoProductos/FormularioProducto";
+
+	    model.addAttribute("estados", Estatus.values());
+
+	    model.addAttribute("marcas", marcaRepo.findAll());
+
+	    model.addAttribute("producto", new ProductoDTO());
+
+	    return "/catalogoProductos/FormularioProducto";
 	}
 	
 	

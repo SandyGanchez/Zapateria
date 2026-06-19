@@ -22,12 +22,29 @@ public class ProductoService {
 	ModelMapper mapper;
 	
 	public List<ProductoDTO> listar(){
-		return productoRepo.findAll().stream()
-				.map(producto -> mapper.map(producto, ProductoDTO.class))
-				.toList();
+
+	    return productoRepo.findAll()
+	    .stream()
+	    .map(producto -> {
+
+	        ProductoDTO dto = mapper.map(producto, ProductoDTO.class);
+
+	        if(producto.getMarca() != null) {
+	            dto.setMarca(producto.getMarca());
+	        }
+
+	        return dto;
+
+	    })
+	    .toList();
 	}
-	public void guardar(ProductoDTO producto) {
-		productoRepo.save(mapper.map(producto, Producto.class));
+	public void guardar(ProductoDTO productoDTO) {
+
+	    Producto producto = mapper.map(productoDTO, Producto.class);
+
+	    producto.setMarca(productoDTO.getMarca());
+
+	    productoRepo.save(producto);
 	}
 	public void actualiza(ProductoDTO producto) {
 	    Optional <Producto> OptProducto=productoRepo.findByUuid(producto.getUuid());

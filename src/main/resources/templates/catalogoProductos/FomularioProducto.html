@@ -2,22 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
 <title>Producto</title>
-<div th:replace="~{lol :: bootstrap}"></div>
+
+<div th:replace="~{lol :: bootstrap}">
+</div>
+
 </head>
 
 
 <body>
 
-<div th:replace="~{lol :: menu}"></div>
+
+<div th:replace="~{lol :: menu}">
+</div>
+
 
 
 <div class="container mt-4">
 
 
-<h1 
+<h2 
 th:text="${uuid} != null ? 'Editar Producto' : 'Nuevo Producto'">
-</h1>
+</h2>
 
 
 
@@ -40,7 +47,6 @@ Nombre:
 
 <input 
 class="form-control"
-type="text"
 th:field="*{nombreSandraSG}">
 
 </div>
@@ -48,15 +54,15 @@ th:field="*{nombreSandraSG}">
 
 
 
+
 <div class="mb-3">
 
-<label>
+<label class="form-label">
 Descripción:
 </label>
 
-<input
+<input 
 class="form-control"
-type="text"
 th:field="*{descripcion}">
 
 </div>
@@ -64,16 +70,17 @@ th:field="*{descripcion}">
 
 
 
+
 <div class="mb-3">
 
-<label>
+<label class="form-label">
 Precio:
 </label>
 
-<input
-class="form-control"
+<input 
 type="number"
 step="0.01"
+class="form-control"
 th:field="*{precio}">
 
 </div>
@@ -81,15 +88,17 @@ th:field="*{precio}">
 
 
 
+
 <div class="mb-3">
 
-<label>
+<label class="form-label">
 Imagen:
 </label>
 
-<input
+
+<input 
 class="form-control"
-type="text"
+placeholder="URL imagen"
 th:field="*{imagen}">
 
 </div>
@@ -98,19 +107,55 @@ th:field="*{imagen}">
 
 
 
+
 <div class="mb-3">
 
-<label>
+<label class="form-label">
+Marca:
+</label>
+
+
+<select 
+class="form-select"
+th:field="*{marca}">
+
+
+<option value="">
+Seleccione una marca
+</option>
+
+
+<option 
+th:each="marca : ${marcas}"
+th:value="${marca.id}"
+th:text="${marca.nombreMarthaASL}">
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
 Estatus:
 </label>
 
 
 <select 
-class="form-control"
+class="form-select"
 th:field="*{estatus}">
 
 
-<option
+<option 
 th:each="estado : ${estados}"
 th:value="${estado}"
 th:text="${estado}">
@@ -119,20 +164,29 @@ th:text="${estado}">
 
 </select>
 
+
 </div>
 
 
 
 
-<button class="btn btn-success">
+
+<button 
+type="submit"
+class="btn btn-success">
+
 Guardar
+
 </button>
 
 
+
 <a 
-class="btn btn-secondary"
-th:href="@{/extraerProductos/listar}">
+th:href="@{/extraerProductos/listar}"
+class="btn btn-secondary">
+
 Cancelar
+
 </a>
 
 
@@ -141,6 +195,8 @@ Cancelar
 
 
 </div>
+
+
 
 </body>
 
