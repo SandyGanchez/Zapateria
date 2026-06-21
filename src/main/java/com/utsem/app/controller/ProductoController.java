@@ -31,7 +31,7 @@ MarcaRepo marcaRepo;
 	@GetMapping("listar")
 	public String metodoListar (Model model) {
 	model.addAttribute("productos", productoService.listar());
-	return "/catalogoProductos/moduloProductos.html";
+	return "/catalogoProductos/moduloProductos";
 
 	}
 	@GetMapping("nuevo")

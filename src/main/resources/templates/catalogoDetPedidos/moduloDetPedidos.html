@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Catálogo Detalle Pedido</title>
+
+	<div th:replace="~{lol :: bootstrap}"></div>
+
+</head>
+
+<body>
+
+	<div th:replace="~{lol :: menu}"></div>
+
+	<div class="container mt-4">
+
+		<h2>Catálogo de Detalle Pedido</h2>
+
+		<table class="table table-bordered table-striped">
+
+			<thead>
+				<tr>
+					<th>Cantidad</th>
+					<th>Precio Unitario</th>
+					<th>Subtotal</th>
+					<th>JoselynSC</th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				<tr th:each="detalle : ${detPedidos}">
+
+					<td th:text="${detalle.cantidad}"></td>
+
+					<td th:text="${detalle.precioUnitario}"></td>
+
+					<td th:text="${detalle.subtotal}"></td>
+
+					<td th:text="${detalle.JoselynSC}"></td>
+
+				</tr>
+
+			</tbody>
+
+		</table>
+
+	</div>
+
+</body>
+
+</html>
