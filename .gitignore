@@ -1,0 +1,31 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+
+# IDE
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Eclipse
+bin/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Spring
+application-local.properties
+application-secret.properties
+
+# Sistema
+.DS_Store
+Thumbs.db

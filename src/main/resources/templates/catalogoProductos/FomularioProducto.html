@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Producto</title>
+
+<div th:replace="~{lol :: bootstrap}">
+</div>
+
+</head>
+
+
+<body>
+
+
+<div th:replace="~{lol :: menu}">
+</div>
+
+
+
+<div class="container mt-4">
+
+
+<h2 
+th:text="${uuid} != null ? 'Editar Producto' : 'Nuevo Producto'">
+</h2>
+
+
+
+<form 
+th:action="${uuid} == null ? @{/extraerProductos/guardar} : @{/extraerProductos/actualizar}"
+method="post"
+th:object="${producto}">
+
+
+
+<input type="hidden" th:field="*{uuid}">
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Nombre:
+</label>
+
+<input 
+class="form-control"
+th:field="*{nombreSandraSG}">
+
+</div>
+
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Descripción:
+</label>
+
+<input 
+class="form-control"
+th:field="*{descripcion}">
+
+</div>
+
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Precio:
+</label>
+
+<input 
+type="number"
+step="0.01"
+class="form-control"
+th:field="*{precio}">
+
+</div>
+
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Imagen:
+</label>
+
+
+<input 
+class="form-control"
+placeholder="URL imagen"
+th:field="*{imagen}">
+
+</div>
+
+
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Marca:
+</label>
+
+
+<select 
+class="form-select"
+th:field="*{marca}">
+
+
+<option value="">
+Seleccione una marca
+</option>
+
+
+<option 
+th:each="marca : ${marcas}"
+th:value="${marca.id}"
+th:text="${marca.nombreMarthaASL}">
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Estatus:
+</label>
+
+
+<select 
+class="form-select"
+th:field="*{estatus}">
+
+
+<option 
+th:each="estado : ${estados}"
+th:value="${estado}"
+th:text="${estado}">
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+<button 
+type="submit"
+class="btn btn-success">
+
+Guardar
+
+</button>
+
+
+
+<a 
+th:href="@{/extraerProductos/listar}"
+class="btn btn-secondary">
+
+Cancelar
+
+</a>
+
+
+
+</form>
+
+
+</div>
+
+
+
+</body>
+
+</html>
