@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Colores</title>
+
+    <div th:replace="~{lol :: bootstrap}"></div>
+
+    <style>
+
+        body{
+            background: linear-gradient(90deg,#36b5e5,#e91e63);
+            min-height: 100vh;
+        }
+
+        .card{
+            border-radius: 20px;
+            border: none;
+        }
+
+        .card-header{
+            background: #e91e63;
+            color: white;
+            border-radius: 20px 20px 0 0 !important;
+        }
+
+        .btn-success{
+            border-radius: 12px;
+            padding: 10px 20px;
+        }
+
+        .btn-warning,
+        .btn-danger{
+            border-radius: 10px;
+        }
+
+        .table{
+            margin-bottom: 0;
+        }
+
+        .table thead{
+            background-color: #212529;
+            color: white;
+        }
+
+        .table tbody tr:hover{
+            background-color: #f8f9fa;
+            transition: .3s;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div th:replace="~{lol :: menu}"></div>
+
+<div class="container-fluid mt-4 px-5">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header p-4">
+            <h1 class="fw-bold mb-0">
+                🎨 Catálogo de Colores
+            </h1>
+            <small>
+                Administra los colores disponibles en tu inventario
+            </small>
+        </div>
+
+        <div class="card-body">
+
+            <a th:href="@{/extraerColores/nuevo}"
+               class="btn btn-success mb-4">
+                ➕ Nuevo Color
+            </a>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre del Color</th>
+                            <th width="250">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr th:each="c,iter : ${colores}">
+
+                            <td th:text="${iter.count}"></td>
+
+                            <td class="fw-bold"
+                                th:text="${c.nombreJonatanMG}">
+                            </td>
+
+                            <td>
+
+							
+								<a th:href="@{'/extraerColores/editar/' + ${c.id}}"
+								   class="btn btn-warning btn-sm">
+								    ✏️ Editar
+								</a>
+								
+								<a th:href="@{'/extraerColores/eliminar/' + ${c.id}}"
+								   class="btn btn-danger btn-sm"
+								   onclick="return confirm('¿Desea eliminar este color?')">
+								    🗑️ Eliminar
+								</a>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+           
+
+    </div>
+
+</div>
+
+</body>
+</html>

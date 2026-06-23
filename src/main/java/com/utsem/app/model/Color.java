@@ -2,23 +2,27 @@ package com.utsem.app.model;
 
 import java.util.UUID;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Color {
-	@Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	@Column
+
+    @Column(nullable = false)
     private String nombreJonatanMG;
 
-    @Column(unique=true)
+    @Column(unique = true, length = 36)
     private UUID uuid;
-    
+
+    @PrePersist
+    public void generarUUID() {
+        if (uuid == null) {
+            uuid = UUID.randomUUID();
+        }
+    }
 
 	public Long getId() {
 		return id;
@@ -43,5 +47,6 @@ public class Color {
 	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
 	}
-	
+
+  
 }
