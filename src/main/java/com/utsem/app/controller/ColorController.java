@@ -47,8 +47,16 @@ public class ColorController {
     }
 
     @GetMapping("eliminar/{id}")
-    public String metodoEliminar(@PathVariable Long id) {
-        colorService.eliminar(id);
+    public String metodoEliminar(@PathVariable Long id, Model model) {
+
+        try {
+            colorService.eliminar(id);
+        } catch (Exception e) {
+            model.addAttribute("colores", colorService.listar());
+            model.addAttribute("error", "No se puede eliminar este color porque está relacionado con algún producto.");
+            return "catalogoColores/moduloColores";
+        }
+
         return "redirect:/extraerColores/listar";
     }
 }
