@@ -16,30 +16,52 @@
 		<div class="card shadow">
 
 			<div class="card-header bg-success text-white">
-				<h2 class="mb-0">🎨 Registro de Colores</h2>
-			</div>
 
-			<div class="card-body">
+			    <h2 class="mb-0"
+			        th:text="${color.id == null ? '🎨 Nuevo Color' : '✏️ Editar Color'}">
+			    </h2>
+
+			</div>
 
 				<form th:action="@{/extraerColores/guardar}" th:object="${color}" method="post">
 
 					<input type="hidden" th:field="*{id}">
 
 					<div class="mb-3">
-						<label class="form-label">Nombre del Color</label>
+						<label class="form-label">ColorJonatanMG</label>
 
 						<input type="text" th:field="*{nombreJonatanMG}" class="form-control"
 							placeholder="Ejemplo: Negro">
 					</div>
 
-					<button type="submit" class="btn btn-success">
-						💾 Guardar
-					</button>
+					<div class="d-flex gap-2">
 
-					<a th:href="@{/extraerColores/listar}" class="btn btn-secondary">
-						↩️ Regresar
-					</a>
+					    <button type="submit" class="btn btn-success">
 
+					        <span th:if="${color.id == null}">
+					            💾 Guardar
+					        </span>
+
+					        <span th:if="${color.id != null}">
+					            ✏️ Actualizar
+					        </span>
+
+					    </button>
+
+					    <a th:href="@{/extraerColores/listar}"
+					       class="btn btn-secondary">
+
+					        <span th:if="${color.id == null}">
+					            ↩️ Cancelar
+					        </span>
+
+					        <span th:if="${color.id != null}">
+					            ⬅️ Regresar
+					        </span>
+
+					    </a>
+
+					</div>
 				</form>
 
 			</div>
